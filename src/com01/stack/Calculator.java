@@ -7,7 +7,7 @@ public class Calculator {
 
     public static void main(String[] args) {
         //1 + ( 2 + 3 ) * 4  中缀表达式 转后缀表达式 （逆波兰表达式）
-        String ex = "1 + ( 2 + 8 ) / 2";
+        String ex = "1 + ( ( 2 + 8 ) * 2 ) / 2";
         String resv = getResBolan(ex);
         System.out.println(resv); // 1 2 3 + 4 * +
         // 21
