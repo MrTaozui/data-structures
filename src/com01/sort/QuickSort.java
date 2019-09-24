@@ -16,9 +16,9 @@ public class QuickSort {
     }
 
     public static void sort(int[] arr, int left, int right) {
-//        if(left==right){ // if flag:1 //如果数组规模是1 则不用排列了
-//            return;
-//        }
+        if(left>=right){ // if flag:1 //如果数组规模是1 则不用排列了
+            return;
+        }
 
         int mid = (left + right) / 2;
         int pointer = arr[mid];//基准数
@@ -54,10 +54,10 @@ public class QuickSort {
             r++;
         }
         //然后递归 排左边
-        if(left < l) //此判断是为了防止组 规模很小的时候为1个 就不用递归排序了 //也可以在第一排加校验
+        if(left < l) //此判断是为了防止组 规模很小的时候为1个或者经过上面的调整出现越界的情况 就不用递归排序了 //也可以在第一排加校验
         sort(arr,left,l);
         //然后递归排右边
-        if(right > r)//此判断是为了防止组 规模很小的时候为1个 就不用递归排序了 //也可以在第一排加校验
+        if(right > r)//此判断是为了防止组 规模很小的时候为1个或者经过上面的调整出现越界的情况 就不用递归排序了 //也可以在第一排加校验
         sort(arr,r,right);
 
 
