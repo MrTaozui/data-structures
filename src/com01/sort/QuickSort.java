@@ -9,13 +9,16 @@ import java.util.Arrays;
  */
 public class QuickSort {
     public static void main(String[] args) {
-        int[] arr = {2,-1,0,-1,4,7,4,9,4,2};
+        int[] arr = {-9,78,0,23,-567,70, -1,900, 4561};
         sort(arr,0,arr.length-1);
         System.out.println(Arrays.toString(arr));
 
     }
 
     public static void sort(int[] arr, int left, int right) {
+//        if(left==right){ // if flag:1 //如果数组规模是1 则不用排列了
+//            return;
+//        }
 
         int mid = (left + right) / 2;
         int pointer = arr[mid];//基准数
@@ -29,6 +32,10 @@ public class QuickSort {
             while (arr[r] > pointer) {//找到右边比基准数小的
                 r--;
             }
+            if(l>=r){//如果 重合说明已经是排放好的了
+                break;
+            }
+
             //交换位置
             int tmp = arr[l];
             arr[l] = arr[r];
@@ -39,17 +46,21 @@ public class QuickSort {
             if (arr[r] == pointer) {//如果交换过后 基准数在右边，基准数不能动 要拿着基准数作比较 左边移位
                 l++;
             }
-            if(l>=r){//经过前面的移位 防止两边重合
-                return;
-
-            }
-            //然后递归 排左边
-            sort(arr,left,r);
-            //然后递归排右边
-            sort(arr,l,right);
-
 
         }
+
+        if (l == r) {//经过移位 两边如果重合 重新调整 基准数两边的数组
+            l --;
+            r++;
+        }
+        //然后递归 排左边
+        if(left < l) //此判断是为了防止组 规模很小的时候为1个 就不用递归排序了 (if flag:1 作用相同)
+        sort(arr,left,l);
+        //然后递归排右边
+        if(right > r)//此判断是为了防止组 规模很小的时候为1个 就不用递归排序了 (if flag:1 作用相同)
+        sort(arr,r,right);
+
+
 
 
     }
