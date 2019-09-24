@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 /**
  * @author taojj .
+ *
+ * 注意点：基准数 要参与比较，以为后 也要参与比较
  */
 public class QuickSort {
     public static void main(String[] args) {
