@@ -15,10 +15,6 @@ public class InsertSort {
         int [] arr = new int[]{5,3,8,1,8,32,0,5,1,5,7,93,6453};
         sort(arr);
         System.out.println(Arrays.toString(arr));
-        String s = "123456";
-        if(s.length()>200) {
-            System.out.println(s.substring(0, 200));
-        }
     }
 
 
