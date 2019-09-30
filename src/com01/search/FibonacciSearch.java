@@ -1,5 +1,7 @@
 package com01.search;
 
+import java.util.Arrays;
+
 /**
  * @author taojj .
  *
@@ -22,4 +24,90 @@ package com01.search;
  * 可以理解成折半查找  这时的fib那契数列 就存了 每次查找mid 的值为 上一步的一半
  */
 public class FibonacciSearch {
+    public static void main(String[] args) {
+        int[] arr = new int[]{0,1,2,3,4,5,6,7,8,9};
+        System.out.println(search(arr,7));
+
+
+    }
+
+
+
+    public static int[] genFibArr(int length){
+        int[] arr = new int[length];
+        arr[0] = 1;
+        arr[1] = 1;
+        for (int k = 2;k<length;k++){
+            arr[k] =  arr[k-1]+ arr[k-2];
+
+        }
+        return  arr;
+    }
+
+
+    //递归查找
+    public static int search(int[] arr,int findvalue){
+        int[] fibArr = genFibArr(arr.length);//构成fibo 数列
+        int index = 0;
+        for (int i = 0; i <=fibArr.length ; i++) {
+            if(fibArr[i]>=arr.length){
+                index = i;
+                break;
+            }
+
+        }
+
+        int[] newArr = Arrays.copyOf(arr,fibArr[index]);//构建新数组
+
+        for(int i=arr.length;i<newArr.length;i++){
+            newArr[i]=arr[arr.length-1];
+        }
+       // System.out.println(Arrays.toString(newArr));
+        return fibonacciSearch(newArr,fibArr,findvalue,0,newArr.length-1);
+
+    }
+
+    //查找的逻辑。查看fib数组 表 来确定 要查找的mid的位置 就是左边分割长度多少，右边分割长度多少
+    public  static int fibonacciSearch(int[] arr,int[] fibArr ,int findValue,int left,int right){
+        int result = -1;
+        if(left>right){
+            return -1;
+        }
+        int index = 1;//注意开始的位置，说明 长度为1的时候，左边一个 右边没有
+
+        int length = right -left +1;
+        while (true){//找到fib表中自己的长度
+            if(length<=fibArr[index]){
+                break;
+            }
+            index+=1;
+        }
+        //System.out.println(index);
+
+        int mid = left + fibArr[index-1] -1;//左边长度减一 确定长度为 fibArr[i]的数组中 找到 mid的位置
+        if(arr[mid] > findValue){
+            right = mid-1;
+            result = fibonacciSearch(arr,fibArr,findValue,left,right);
+            if(result!=-1){
+                return result;
+            }
+
+        }else if(arr[mid]<findValue){
+            left = mid +1;
+            result = fibonacciSearch(arr,fibArr,findValue,left,right);
+            if(result!=-1){
+                return result;
+            }
+        }else {
+            if(mid>arr.length-1){
+                return arr.length-1;
+            }else {
+                return mid;
+            }
+        }
+
+
+        return  result;
+    }
+
 }
