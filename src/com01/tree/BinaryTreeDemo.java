@@ -24,7 +24,8 @@ public class BinaryTreeDemo {
         tree.preOrder();
         System.out.println("--------中序遍历---------");
         tree.midOrder();
-
+        System.out.println("--------后序遍历---------");
+        tree.postOrder();
 
 
     }
@@ -50,6 +51,13 @@ class BinaryTree{
         }
     }
 
+    public void postOrder(){
+        if(root!=null){
+            root.postOrder();
+        }else {
+            System.out.println("树为空");
+        }
+    }
 
 
 
@@ -91,13 +99,23 @@ class HeroNode{
     public void midOrder(){
 
         if(left!=null){
-            left.preOrder();
+            left.midOrder();
         }
         System.out.println(this);
         if (rigtht!=null){
-            rigtht.preOrder();
+            rigtht.midOrder();
         }
 
+    }
+
+    public void postOrder(){
+        if(left!=null){
+            left.postOrder();
+        }
+        if (rigtht!=null){
+            rigtht.postOrder();
+        }
+        System.out.println(this);
     }
 
     public int getNo() {
