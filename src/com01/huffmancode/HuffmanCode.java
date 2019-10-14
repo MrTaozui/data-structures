@@ -13,8 +13,10 @@ public class HuffmanCode {
 
     public static void main(String[] args) {
         String str = "i like like like java do you like a java";
-        Map<Byte, String> huffmanTable = genHuffmanCode(str);
-        huffmanTable.forEach((k,v)-> System.out.println(k+":"+v));
+        //Map<Byte, String> huffmanTable = genHuffmanCode(str);
+        //huffmanTable.forEach((k,v)-> System.out.println(k+":"+v));
+        byte[] zip = zip(str);
+        System.out.println(Arrays.toString(zip));
 
 
     }
@@ -108,12 +110,18 @@ public class HuffmanCode {
         for (byte byt:bytes){
             strCode.append(huffmanTable.get(byt));
         }
-        int length = (strCode.length()+7)%8;//长度不足8的倍数的时候 补足
+       // System.out.println(strCode.toString());
+        int length = (strCode.length()+7)/8;//长度不足8的倍数的时候 补足
         byte[] result = new byte[length];
 
-        for (int i=0;i<length;i+=8){
-            String unitCode = strCode.substring(i,i+8);
-            result[i] = (byte) Integer.parseInt(unitCode,2);//转二进制
+        for (int i=0;i<strCode.length();i+=8){
+            String unitCode;
+            if(i+8>strCode.length()){
+                unitCode = strCode.substring(i);
+            }else {
+                unitCode = strCode.substring(i, i + 8);
+            }
+            result[i/8] = (byte) Integer.parseInt(unitCode, 2);//转二进制
 
         }
         return result;
