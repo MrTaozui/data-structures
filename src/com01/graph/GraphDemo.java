@@ -2,6 +2,7 @@ package com01.graph;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -22,7 +23,8 @@ public class GraphDemo {
         graph.addEdge(1, 3, 1);
         graph.addEdge(1, 4, 1);
         graph.showEdges();
-        graph.dfs();
+       // graph.dfs();
+        graph.bfs();
     }
 }
 
@@ -58,6 +60,8 @@ class Graph {
     /**
      * 对当前节点进行深度优先遍历
      *
+     * 步骤：先得到一个节点
+     * 访问标记，获取邻接节点，是否存在，是否访问过深度优先遍历，如
      * @param isVisited
      * @param vertex
      */
@@ -98,9 +102,32 @@ class Graph {
      * @param isVisited
      * @param vertex
      */
-    public void bfs(boolean[] isVisited, int vertex){
-        
+    private void bfs(boolean[] isVisited, int vertex){
+        //打印此节点
+        System.out.print(getVertexById(vertex) + "=>");
+        isVisited[vertex] = true;//此节点设置为被访问
+        LinkedList<Integer> list = new LinkedList<>();//存储访问顺序的队列
+        list.addLast(vertex);
+        while (!list.isEmpty()){
+          int vx = list.removeFirst();//获取第一个需要访问的节点
+          int w = getFirstNeighbor(vx);//获取第一个邻接节点
+          while (w!=-1){
+              if(!isVisited[w]){
+                  System.out.print(getVertexById(w)+"=>");
+                  isVisited[w] = true;
+                  list.addLast(w);
+              }
+              w = getNexNeighbor(vertex,w);
+          }
+       }
 
+    }
+
+    public void bfs(){
+        for (int i = 0; i < vertexs.size(); i++) {
+            if(!isVisited[i])
+                bfs(isVisited,i);
+        }
     }
 
     /**
