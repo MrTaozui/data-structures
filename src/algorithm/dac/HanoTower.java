@@ -1,4 +1,4 @@
-package algorithm.hanoitower;
+package algorithm.dac;
 
 /**
  * @author taojj .
@@ -34,7 +34,7 @@ public class HanoTower {
      */
     public static void move(int num, char a, char b, char c) {
         if (num == 1) {
-            System.out.println(a + "->" + c);
+            System.out.println(a + "->" + c);//决定移动方式从a-c
         } else {
             move(num - 1, a, c, b);//上层借助c移到b   b相当于第三根
             System.out.println(a + "->" + c);//下层从a到c
