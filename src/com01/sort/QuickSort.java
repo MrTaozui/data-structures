@@ -6,6 +6,11 @@ import java.util.Arrays;
  * @author taojj .
  *
  * 注意点：有相同数和基准数相同，这种情况下的移动
+ *
+ * 助记说明：找个中间的基准数，l r对冲移动，
+ *  left到l  rigth到r覆盖的地方就是完成的。
+ *  l==r 说明完成，但是下一轮要继续比较,l r继续移动一位,就会交错
+ *  重新规划大小，重新从left到r ,l到right操作
  */
 public class QuickSort {
     public static void main(String[] args) {
@@ -68,3 +73,4 @@ public class QuickSort {
 
     }
 }
+
