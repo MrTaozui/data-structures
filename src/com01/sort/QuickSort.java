@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * @author taojj .
  *
- * 注意点：基准数 要参与比较，以为后 也要参与比较
+ * 注意点：有相同数和基准数相同，这种情况下的移动
  */
 public class QuickSort {
     public static void main(String[] args) {
