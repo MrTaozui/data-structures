@@ -26,7 +26,7 @@ public class QuickSort {
         int r = right;
         while (r > l) {//当l>= r 时说明左边都比基准数小，右边都比基准数大
 
-            while (arr[l] < pointer) {//找到左边比 基准数大的 不能等于 会丢失基准数
+            while (arr[l] < pointer) {//找到左边比 基准数大的 不能等于 会丢失基准数，l==mid
                 l++;
             }
             while (arr[r] > pointer) {//找到右边比基准数小的
@@ -40,11 +40,11 @@ public class QuickSort {
             int tmp = arr[l];
             arr[l] = arr[r];
             arr[r] = tmp;
-            if (arr[l] == pointer) {//如果交换过后 基准数在左边，基准数不能动 要拿着基准数作比较 右边移位
-                r--;
+            if (arr[l] == pointer) {//如果交换过后 基准数在左边，基准数不能动 要拿着基准数作比较 右边移位 用全[1,1,1...]助记
+                r--;//因为是右边交换到左边的 所以右边前进
             }
             if (arr[r] == pointer) {//如果交换过后 基准数在右边，基准数不能动 要拿着基准数作比较 左边移位
-                l++;
+                l++;//因为是左边交换到右边的 所以左边前进
             }
 
         }
